@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EXIF to KMZ Converter</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.1/dist/MarkerCluster.Default.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.13.0/leaflet-providers.min.js" integrity="sha512-5EYsvqNbFZ8HX60keFbe56Wr0Mq5J1RrA0KdVcfGDhnjnzIRsDrT/S3cxdzpVN2NGxAB9omgqnlh4/06TvWCMw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <header>
+    <h1>EXIF2KMZ-相片地點轉KMZ</h1>
+  </header>
+  <div class="custom-file-upload">
+    <label for="fileInput">Upload Image</label>
+    <input type="file" id="fileInput" accept="image/*" multiple>
+  </div>
+  <button id="convertButton">Convert to KML</button>
+  <div>
+  <a id="downloadLink" style="display: none;"></a>
+  </div>
+  <div style="text-align:center;" >
+    <!-- <h1>Exif imformation</h1> -->
+    <textarea id="exifInfo" rows="15" name="S2" cols="155" id="target"></textarea>
+  </div>
+  <div id="map"></div>
+  <div>
+    <h3>©2023 本工具為:Geolab空間資訊實驗室製作維護</h3>
+  </div>
+  <script>
+    // Create a map
+    var map = L.map('map').setView([24.191075340950587,120.67623138427736],8);
+    L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
+    const inputElement = document.getElementById('fileInput');
+    const displayElement=document.getElementById('exifInfo');
+    const convertButton = document.getElementById('convertButton');
+    const downloadLinksContainer= document.getElementById('downloadLink')
+    const kmlInfo = [];
+    let log=''
+    let imgFiles
+  </script>
+  <script src="./script/imageReader.js"></script>
+  <script src="./script/kmzExport.js"></script>
+  </script>
+</body>
+</html>
